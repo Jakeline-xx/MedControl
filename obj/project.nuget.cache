@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "XOyVSkjbUO/o0FAbio1tj5Lh1Spqn/UVrNl1l+y5CFdl0lmyjJ/11VJUpSMltDNtdwnjc3snewOHwiKlwX61sw==",
+  "success": true,
+  "projectFilePath": "C:\\Projetos\\MedControl\\MedControl.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\jakel\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.17.2\\microsoft.visualstudio.azure.containers.tools.targets.1.17.2.nupkg.sha512"
+  ],
+  "logs": []
+}
