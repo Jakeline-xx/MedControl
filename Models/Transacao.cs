@@ -2,10 +2,10 @@
 {
     public class Transacao : Entidade
     {
-        public DateTime DataTransacao { get; set; }
         public Guid IdEstoque { get; set; }
         public Guid IdFuncionario{ get; set; }
         public int Quantidade { get; set; }
+        public DateTime DataTransacao { get; set; }
 
         //EF Core Relations
         public Estoque Estoque { get; set; }

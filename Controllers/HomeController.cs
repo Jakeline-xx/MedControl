@@ -1,4 +1,4 @@
-﻿using MedControl.Models;
+﻿using MedControl.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

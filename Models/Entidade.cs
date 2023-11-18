@@ -1,9 +1,9 @@
 ﻿namespace MedControl.Models
 {
-    public class Entidade
+    public abstract class Entidade
     {
-        public Guid Id { get; set; }
-        public Entidade()
+        protected Guid Id { get; set; }
+        protected Entidade()
         {
             Id = Guid.NewGuid();
         }
