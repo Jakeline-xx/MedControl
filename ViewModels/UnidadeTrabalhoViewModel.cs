@@ -13,12 +13,24 @@ namespace MedControl.ViewModels
         [Required(ErrorMessage = "O campo Logradouro é obrigatório.")]
         public string Logradouro { get; set; }
 
+        //UnidadeTrabalhoViewModel -> UnidadeTrabalho
         public static implicit operator UnidadeTrabalho(UnidadeTrabalhoViewModel viewModel)
         {
             return new UnidadeTrabalho
             {
+                Id = viewModel.Id,
                 Nome = viewModel.Nome,
                 Logradouro = viewModel.Logradouro
+            };
+        }
+        //UnidadeTrabalho -> UnidadeTrabalhoViewModel
+        public static implicit operator UnidadeTrabalhoViewModel(UnidadeTrabalho unidadeTrabalho)
+        {
+            return new UnidadeTrabalhoViewModel
+            {
+                Id = unidadeTrabalho.Id,
+                Nome = unidadeTrabalho.Nome,
+                Logradouro = unidadeTrabalho.Logradouro
             };
         }
     }

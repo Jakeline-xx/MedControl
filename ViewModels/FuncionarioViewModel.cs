@@ -18,14 +18,28 @@ namespace MedControl.ViewModels
         [Phone(ErrorMessage = "O campo Telefone não é um número de telefone válido")]
         public string Telefone { get; set; }
 
+        //FuncionarioViewModel -> Funcionario
         public static implicit operator Funcionario(FuncionarioViewModel viewModel)
         {
             return new Funcionario
             {
+                Id = viewModel.Id,
                 Nome = viewModel.Nome,
                 Cargo = viewModel.Cargo,
                 Identificacao = viewModel.Identificacao,
                 Telefone = viewModel.Telefone
+            };
+        }
+        //Funcionario -> FuncionarioViewModel
+        public static implicit operator FuncionarioViewModel(Funcionario funcionario)
+        {
+            return new FuncionarioViewModel
+            {
+                Id = funcionario.Id,
+                Nome = funcionario.Nome,
+                Cargo = funcionario.Cargo,
+                Identificacao = funcionario.Identificacao,
+                Telefone = funcionario.Telefone
             };
         }
     }

@@ -17,7 +17,10 @@ namespace MedControl.Controllers
         public async Task<IActionResult> Index()
         {
             var funcionarios = await _funcionarioRepository.ObterTodos();
-            return View(funcionarios);
+
+            var funcionarioViewModels = funcionarios.Select(funcionario => (FuncionarioViewModel)funcionario).ToList();
+
+            return View(funcionarioViewModels);
         }
 
         public async Task<IActionResult> Detalhes(Guid id)
@@ -28,8 +31,8 @@ namespace MedControl.Controllers
             {
                 return NotFound();
             }
-
-            return View(funcionario);
+            FuncionarioViewModel funcionarioViewModel = funcionario;
+            return View(funcionarioViewModel);
         }
 
         public IActionResult Criar()

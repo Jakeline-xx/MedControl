@@ -17,7 +17,10 @@ namespace MedControl.Controllers
         public async Task<IActionResult> Index()
         {
             var departamentos = await _departamentoRepository.ObterTodos();
-            return View(departamentos);
+
+            var departamentoViewModels = departamentos.Select(departamento => (DepartamentoViewModel)departamento).ToList();
+
+            return View(departamentoViewModels);
         }
 
         public async Task<IActionResult> Detalhes(Guid id)
@@ -28,8 +31,8 @@ namespace MedControl.Controllers
             {
                 return NotFound();
             }
-
-            return View(departamento);
+            DepartamentoViewModel departamentoViewModel = departamento;
+            return View(departamentoViewModel);
         }
 
         public IActionResult Criar()
@@ -90,7 +93,9 @@ namespace MedControl.Controllers
                 return NotFound();
             }
 
-            return View(departamento);
+            DepartamentoViewModel departamentoViewModel = departamento;
+
+            return View(departamentoViewModel);
         }
 
         [HttpPost]
