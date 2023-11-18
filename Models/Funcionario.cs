@@ -1,14 +1,12 @@
 ﻿namespace MedControl.Models
 {
-    public class Funcionario
+    public class Funcionario : Entidade
     {
-        public Guid Id { get; set; }
+        public Guid IdUnidadeTrabalho{ get; set; }
         public string Nome { get; set; }
-
-        public Funcionario()
-        {
-            Id = Guid.NewGuid();
-        }
-
+        public string Cargo { get; set; }
+        public string Identificacao { get; set; }
+        //EF Core Relations
+        public UnidadeTrabalho UnidadeTrabalho { get; set; }
     }
 }
