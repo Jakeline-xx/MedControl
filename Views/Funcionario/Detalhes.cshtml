@@ -1,21 +1,19 @@
-﻿@model MedControl.ViewModels.FuncionarioViewModel
-@{
-    ViewData["Title"] = "Detalhes do Funcionário";
-}
+﻿@model MedControl.ViewModels.FuncionarioDetalhesViewModel
 
-<div class="container mt-4">
-    <h2>Detalhes do Funcionário</h2>
-
+<div>
+    <h4>Detalhes do Funcionário</h4>
+    <hr />
     <dl class="row">
-
         <dt class="col-sm-2">Nome</dt>
-        <dd class="col-sm-10">@Model.Nome</dd>
+        <dd class="col-sm-10">@Model.Funcionario.Nome</dd>
 
         <dt class="col-sm-2">Cargo</dt>
-        <dd class="col-sm-10">@Model.Cargo</dd>
-    </dl>
+        <dd class="col-sm-10">@Model.Funcionario.Cargo</dd>
 
-    <p>
-        <a asp-action="Index" class="btn btn-primary">Voltar para a Lista</a>
-    </p>
+        <dt class="col-sm-2">Departamento</dt>
+        <dd class="col-sm-10">@Model.NomeDepartamento</dd>
+
+        <dt class="col-sm-2">Unidade de Trabalho</dt>
+        <dd class="col-sm-10">@Model.NomeUnidadeTrabalho</dd>
+    </dl>
 </div>

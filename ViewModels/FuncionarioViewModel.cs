@@ -6,6 +6,13 @@ namespace MedControl.ViewModels
     public class FuncionarioViewModel
     {
         public Guid Id { get; set; }
+
+        [Required(ErrorMessage = "O campo Departamento é obrigatório")]
+        public Guid IdDepartamento { get; set; }
+
+        [Required(ErrorMessage = "O campo Unidade de Trabalho é obrigatório")]
+        public Guid IdUnidadeTrabalho { get; set; }
+
         [Required(ErrorMessage = "O campo Nome é obrigatório")]
         public string Nome { get; set; }
 
@@ -24,6 +31,8 @@ namespace MedControl.ViewModels
             return new Funcionario
             {
                 Id = viewModel.Id,
+                IdDepartamento = viewModel.IdDepartamento,
+                IdUnidadeTrabalho = viewModel.IdUnidadeTrabalho,
                 Nome = viewModel.Nome,
                 Cargo = viewModel.Cargo,
                 Identificacao = viewModel.Identificacao,
@@ -36,6 +45,8 @@ namespace MedControl.ViewModels
             return new FuncionarioViewModel
             {
                 Id = funcionario.Id,
+                IdDepartamento = funcionario.IdDepartamento,
+                IdUnidadeTrabalho = funcionario.IdUnidadeTrabalho,
                 Nome = funcionario.Nome,
                 Cargo = funcionario.Cargo,
                 Identificacao = funcionario.Identificacao,

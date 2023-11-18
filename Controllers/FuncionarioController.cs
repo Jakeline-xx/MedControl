@@ -1,17 +1,25 @@
-﻿using MedControl.Data.Repositories.Abstractions;
+﻿using MedControl.Data.Repositories;
+using MedControl.Data.Repositories.Abstractions;
 using MedControl.Models;
 using MedControl.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MedControl.Controllers
 {
     public class FuncionarioController : Controller
     {
         private readonly IFuncionarioRepository _funcionarioRepository;
+        private readonly IDepartamentoRepository _departamentoRepository;
+        private readonly IUnidadeTrabalhoRepository _unidadeTrabalhoRepository;
 
-        public FuncionarioController(IFuncionarioRepository funcionarioRepository)
+        public FuncionarioController(IFuncionarioRepository funcionarioRepository,
+                                    IDepartamentoRepository departamentoRepository,
+                                    IUnidadeTrabalhoRepository unidadeTrabalhoRepository)
         {
             _funcionarioRepository = funcionarioRepository;
+            _departamentoRepository = departamentoRepository;
+            _unidadeTrabalhoRepository = unidadeTrabalhoRepository;
         }
 
         public async Task<IActionResult> Index()
@@ -23,6 +31,7 @@ namespace MedControl.Controllers
             return View(funcionarioViewModels);
         }
 
+
         public async Task<IActionResult> Detalhes(Guid id)
         {
             var funcionario = await _funcionarioRepository.ObterPorId(id);
@@ -31,12 +40,33 @@ namespace MedControl.Controllers
             {
                 return NotFound();
             }
-            FuncionarioViewModel funcionarioViewModel = funcionario;
-            return View(funcionarioViewModel);
+
+            var departamento = await _departamentoRepository.ObterPorId(funcionario.IdDepartamento);
+
+            var unidadeTrabalho = await _unidadeTrabalhoRepository.ObterPorId(funcionario.IdUnidadeTrabalho);
+
+            var detalhesViewModel = new FuncionarioDetalhesViewModel
+            {
+                Funcionario = funcionario,
+                NomeDepartamento = departamento?.Nome,
+                NomeUnidadeTrabalho = unidadeTrabalho?.Nome
+            };
+
+            return View(detalhesViewModel);
         }
 
-        public IActionResult Criar()
+
+
+
+        public async Task<IActionResult> Criar()
         {
+            var departamentos = await _departamentoRepository.ObterTodos();
+
+            var unidadesTrabalho = await _unidadeTrabalhoRepository.ObterTodos();
+
+            ViewBag.Departamentos = new SelectList(departamentos, "Id", "Nome");
+            ViewBag.UnidadesTrabalho = new SelectList(unidadesTrabalho, "Id", "Nome");
+
             return View();
         }
 
