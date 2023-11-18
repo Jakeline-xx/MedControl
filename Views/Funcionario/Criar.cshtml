@@ -1,4 +1,4 @@
-﻿@model MedControl.Models.Funcionario
+﻿@model MedControl.ViewModels.FuncionarioViewModel
 
 @{
     ViewData["Title"] = "Criar Funcionário";
@@ -11,12 +11,23 @@
         <div class="form-group">
             <label asp-for="Nome" class="control-label">Nome</label>
             <input asp-for="Nome" class="form-control" />
+            <span asp-validation-for="Nome" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Cargo" class="control-label">Cargo</label>
             <input asp-for="Cargo" class="form-control" />
+            <span asp-validation-for="Cargo" class="text-danger"></span>
         </div>
-
+        <div class="form-group">
+            <label asp-for="Identificacao" class="control-label">Identificação</label>
+            <input asp-for="Identificacao" class="form-control" />
+            <span asp-validation-for="Identificacao" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Telefone" class="control-label">Telefone</label>
+            <input asp-for="Telefone" class="form-control" />
+            <span asp-validation-for="Telefone" class="text-danger"></span>
+        </div>
 
         <div class="form-group">
             <button type="submit" class="btn btn-success">Salvar</button>
@@ -24,3 +35,9 @@
         </div>
     </form>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

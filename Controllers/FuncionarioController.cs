@@ -1,5 +1,6 @@
 ﻿using MedControl.Data.Repositories.Abstractions;
 using MedControl.Models;
+using MedControl.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MedControl.Controllers
@@ -37,7 +38,7 @@ namespace MedControl.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Criar(Funcionario funcionario)
+        public async Task<IActionResult> Criar(FuncionarioViewModel funcionario)
         {
             await _funcionarioRepository.Adicionar(funcionario);
             return RedirectToAction("Index");
@@ -56,7 +57,7 @@ namespace MedControl.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Editar(Funcionario funcionario)
+        public async Task<IActionResult> Editar(FuncionarioViewModel funcionario)
         {
             await _funcionarioRepository.Atualizar(funcionario);
             return RedirectToAction("Index");
