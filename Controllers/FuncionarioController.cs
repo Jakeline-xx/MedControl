@@ -98,8 +98,17 @@ namespace MedControl.Controllers
                 Nome = funcionario.Nome,
                 Cargo = funcionario.Cargo,
                 Identificacao = funcionario.Identificacao,
-                Telefone = funcionario.Telefone
+                Telefone = funcionario.Telefone,
+                IdDepartamento = funcionario.IdDepartamento,
+                IdUnidadeTrabalho = funcionario.IdUnidadeTrabalho
             };
+            var departamentos = await _departamentoRepository.ObterTodos();
+
+            var unidadesTrabalho = await _unidadeTrabalhoRepository.ObterTodos();
+
+            ViewBag.Departamentos = new SelectList(departamentos, "Id", "Nome", viewModel.IdDepartamento);
+            ViewBag.UnidadesTrabalho = new SelectList(unidadesTrabalho, "Id", "Nome", viewModel.IdUnidadeTrabalho);
+
 
             return View(viewModel);
         }
