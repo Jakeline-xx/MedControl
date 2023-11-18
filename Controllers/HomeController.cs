@@ -18,7 +18,7 @@ namespace MedControl.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Privacidade()
         {
             return View();
         }
