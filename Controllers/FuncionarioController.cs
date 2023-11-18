@@ -20,9 +20,9 @@ namespace MedControl.Controllers
             return View(funcionarios);
         }
 
-        public IActionResult Detalhes(Guid id)
+        public async Task<IActionResult> Detalhes(Guid id)
         {
-            var funcionario = _funcionarioRepository.ObterPorId(id);
+            var funcionario = await _funcionarioRepository.ObterPorId(id);
 
             if (funcionario == null)
             {
@@ -84,9 +84,9 @@ namespace MedControl.Controllers
             return View(funcionarioViewModel);
         }
 
-        public IActionResult Excluir(Guid id)
+        public async Task<IActionResult> Excluir(Guid id)
         {
-            var funcionario = _funcionarioRepository.ObterPorId(id);
+            var funcionario = await _funcionarioRepository.ObterPorId(id);
 
             if (funcionario == null)
             {

@@ -14,15 +14,15 @@ namespace MedControl.Controllers
             _departamentoRepository = departamentoRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var departamentos = _departamentoRepository.ObterTodos();
+            var departamentos = await _departamentoRepository.ObterTodos();
             return View(departamentos);
         }
 
-        public IActionResult Detalhes(Guid id)
+        public async Task<IActionResult> Detalhes(Guid id)
         {
-            var departamento = _departamentoRepository.ObterPorId(id);
+            var departamento = await _departamentoRepository.ObterPorId(id);
 
             if (departamento == null)
             {
@@ -38,12 +38,12 @@ namespace MedControl.Controllers
         }
 
         [HttpPost]
-        public IActionResult Criar(DepartamentoViewModel departamentoViewModel)
+        public async Task<IActionResult> Criar(DepartamentoViewModel departamentoViewModel)
         {
             if (ModelState.IsValid)
             {
                 Departamento departamento = departamentoViewModel;
-                _departamentoRepository.Adicionar(departamento);
+                await _departamentoRepository.Adicionar(departamento);
                 return RedirectToAction("Index");
             }
 
@@ -94,9 +94,9 @@ namespace MedControl.Controllers
         }
 
         [HttpPost]
-        public IActionResult ExcluirConfirmado(Guid id)
+        public async Task<IActionResult> ExcluirConfirmado(Guid id)
         {
-            _departamentoRepository.Remover(id);
+            await _departamentoRepository.Remover(id);
             return RedirectToAction("Index");
         }
     }
