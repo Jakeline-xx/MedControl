@@ -38,29 +38,50 @@ namespace MedControl.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Criar(FuncionarioViewModel funcionario)
+        public async Task<IActionResult> Criar(FuncionarioViewModel funcionarioViewModel)
         {
-            await _funcionarioRepository.Adicionar(funcionario);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                Funcionario funcionario = funcionarioViewModel;
+                await _funcionarioRepository.Adicionar(funcionario);
+                return RedirectToAction("Index");
+            }
+
+            return View(funcionarioViewModel);
         }
 
-        public IActionResult Editar(Guid id)
+
+        public async Task<IActionResult> Editar(Guid id)
         {
-            var funcionario = _funcionarioRepository.ObterPorId(id);
+            var funcionario = await _funcionarioRepository.ObterPorId(id);
 
             if (funcionario == null)
             {
                 return NotFound();
             }
 
-            return View(funcionario);
+            var viewModel = new FuncionarioViewModel
+            {
+                Nome = funcionario.Nome,
+                Cargo = funcionario.Cargo,
+                Identificacao = funcionario.Identificacao,
+                Telefone = funcionario.Telefone
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Editar(FuncionarioViewModel funcionario)
+        public async Task<IActionResult> Editar(FuncionarioViewModel funcionarioViewModel)
         {
-            await _funcionarioRepository.Atualizar(funcionario);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                Funcionario funcionario = funcionarioViewModel;
+                await _funcionarioRepository.Atualizar(funcionario);
+                return RedirectToAction("Index");
+            }
+
+            return View(funcionarioViewModel);
         }
 
         public IActionResult Excluir(Guid id)
