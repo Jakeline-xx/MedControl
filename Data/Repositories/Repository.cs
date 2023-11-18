@@ -29,7 +29,8 @@ namespace MedControl.Data.Repositories
 
         public virtual async Task<List<TEntidade>> ObterTodos()
         {
-            return await DbSet.ToListAsync();
+            var x = await DbSet.ToListAsync();
+            return x;
         }
 
         public virtual async Task Adicionar(TEntidade entidade)

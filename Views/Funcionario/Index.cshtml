@@ -1,0 +1,38 @@
+﻿@model IEnumerable<MedControl.Models.Funcionario>
+
+@{
+    ViewData["Title"] = "Lista de Funcionários";
+}
+
+<div class="container mt-4">
+    <h2>Funcionários</h2>
+    <p>
+        <a asp-action="Criar" class="btn btn-success">Novo Funcionário</a>
+    </p>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Cargo</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var funcionario in Model)
+            {
+                <tr>
+                    <td>@funcionario.Id</td>
+                    <td>@funcionario.Nome</td>
+                    <td>@funcionario.Cargo</td>
+                    <td>
+                        <a asp-action="Detalhes" asp-route-id="@funcionario.Id" class="btn btn-info">Detalhes</a>
+                        <a asp-action="Editar" asp-route-id="@funcionario.Id" class="btn btn-warning">Editar</a>
+                        <a asp-action="Excluir" asp-route-id="@funcionario.Id" class="btn btn-danger">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
