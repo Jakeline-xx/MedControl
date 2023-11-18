@@ -86,6 +86,10 @@ namespace MedControl.Controllers
 
         public async Task<IActionResult> Excluir(Guid id)
         {
+            if (TempData["Mensagem"] != null)
+            {
+                ViewBag.Mensagem = TempData["Mensagem"].ToString();
+            }
             var departamento = await _departamentoRepository.ObterPorId(id);
 
             if (departamento == null)
@@ -101,6 +105,15 @@ namespace MedControl.Controllers
         [HttpPost]
         public async Task<IActionResult> ExcluirConfirmado(Guid id)
         {
+            var departamentoFuncionarios = await _departamentoRepository.ObterDepartamentoFuncionarios(id);
+
+            if (departamentoFuncionarios.Funcionarios.Count > 0)
+            {
+                var mensagem = "Não é possível excluir o departamento, pois existem funcionários vinculados";
+                TempData["Mensagem"] = mensagem;
+                return RedirectToAction("Excluir", new { id });
+            }
+
             await _departamentoRepository.Remover(id);
             return RedirectToAction("Index");
         }
