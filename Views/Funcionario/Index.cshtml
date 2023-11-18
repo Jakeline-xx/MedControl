@@ -1,5 +1,4 @@
-﻿@model IEnumerable<MedControl.Models.Funcionario>
-
+﻿@model IEnumerable<MedControl.ViewModels.FuncionarioViewModel>
 @{
     ViewData["Title"] = "Lista de Funcionários";
 }
@@ -23,7 +22,6 @@
             @foreach (var funcionario in Model)
             {
                 <tr>
-                    <td>@funcionario.Id</td>
                     <td>@funcionario.Nome</td>
                     <td>@funcionario.Cargo</td>
                     <td>

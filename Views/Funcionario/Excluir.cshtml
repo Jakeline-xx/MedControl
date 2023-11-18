@@ -1,4 +1,4 @@
-﻿@model MedControl.Models.Funcionario
+﻿@model MedControl.ViewModels.FuncionarioViewModel
 
 <div class="container mt-4">
     <h2>Excluir Funcionário</h2>
@@ -23,8 +23,6 @@
     <p>Tem certeza de que deseja excluir este funcionário?</p>
 
     <form asp-action="ExcluirConfirmado" method="post">
-        <input type="hidden" asp-for="Id" />
-
         <div class="form-group">
             <button type="submit" class="btn btn-danger">Sim, Excluir</button>
             <a asp-action="Index" class="btn btn-primary">Não, Cancelar</a>
