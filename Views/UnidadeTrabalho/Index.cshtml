@@ -1,0 +1,34 @@
+﻿@model IEnumerable<MedControl.Models.UnidadeTrabalho>
+
+<div class="container mt-4">
+    <h2>Unidades de Trabalho</h2>
+    <p>
+        <a asp-action="Criar" class="btn btn-success">Nova Unidade de Trabalho</a>
+    </p>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Logradouro</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var unidadeTrabalho in Model)
+            {
+                <tr>
+                    <td>@unidadeTrabalho.Id</td>
+                    <td>@unidadeTrabalho.Nome</td>
+                    <td>@unidadeTrabalho.Logradouro</td>
+                    <td>
+                        <a asp-action="Detalhes" asp-route-id="@unidadeTrabalho.Id" class="btn btn-info">Detalhes</a>
+                        <a asp-action="Editar" asp-route-id="@unidadeTrabalho.Id" class="btn btn-warning">Editar</a>
+                        <a asp-action="Excluir" asp-route-id="@unidadeTrabalho.Id" class="btn btn-danger">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,20 @@
+﻿@model MedControl.Models.UnidadeTrabalho
+
+<div class="container mt-4">
+    <h2>Detalhes da Unidade de Trabalho</h2>
+
+    <dl class="row">
+        <dt class="col-sm-2">ID</dt>
+        <dd class="col-sm-10">@Model.Id</dd>
+
+        <dt class="col-sm-2">Nome</dt>
+        <dd class="col-sm-10">@Model.Nome</dd>
+
+        <dt class="col-sm-2">Logradouro</dt>
+        <dd class="col-sm-10">@Model.Logradouro</dd>
+    </dl>
+
+    <p>
+        <a asp-action="Index" class="btn btn-primary">Voltar para a Lista</a>
+    </p>
+</div>
