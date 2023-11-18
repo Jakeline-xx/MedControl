@@ -1,4 +1,5 @@
-﻿using MedControl.Data.Repositories.Abstractions;
+﻿using MedControl.Data.Repositories;
+using MedControl.Data.Repositories.Abstractions;
 using MedControl.Models;
 using MedControl.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -87,6 +88,10 @@ namespace MedControl.Controllers
 
         public async Task<IActionResult> Excluir(Guid id)
         {
+            if (TempData["Mensagem"] != null)
+            {
+                ViewBag.Mensagem = TempData["Mensagem"].ToString();
+            }
             var unidadeTrabalho = await _unidadeTrabalhoRepository.ObterPorId(id);
 
             if (unidadeTrabalho == null)
@@ -102,6 +107,15 @@ namespace MedControl.Controllers
         [HttpPost]
         public async Task<IActionResult> ExcluirConfirmado(Guid id)
         {
+            var departamentoFuncionarios = await _unidadeTrabalhoRepository.ObterUnidadeTrabalhoFuncionarios(id);
+
+            if (departamentoFuncionarios.Funcionarios.Count > 0)
+            {
+                var mensagem = "Não é possível excluir a Unidade de Trabalho, pois existem funcionários vinculados";
+                TempData["Mensagem"] = mensagem;
+                return RedirectToAction("Excluir", new { id });
+            }
+
             await _unidadeTrabalhoRepository.Remover(id);
             return RedirectToAction("Index");
         }

@@ -109,7 +109,7 @@ namespace MedControl.Controllers
 
             if (departamentoFuncionarios.Funcionarios.Count > 0)
             {
-                var mensagem = "Não é possível excluir o departamento, pois existem funcionários vinculados";
+                var mensagem = "Não é possível excluir o Departamento, pois existem funcionários vinculados";
                 TempData["Mensagem"] = mensagem;
                 return RedirectToAction("Excluir", new { id });
             }
