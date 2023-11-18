@@ -22,6 +22,10 @@ namespace MedControl.Data.Mappings
                    .IsRequired()
                    .HasColumnType("varchar(200)");
 
+            builder.Property(p => p.Telefone)
+                   .IsRequired()
+                   .HasColumnType("varchar(200)");
+
             // 1 : N => Transacao : Funcionarios
             builder.HasMany(f => f.Transacoes)
                 .WithOne(t => t.Funcionario)

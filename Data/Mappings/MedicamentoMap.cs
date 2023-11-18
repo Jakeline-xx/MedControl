@@ -20,7 +20,8 @@ namespace MedControl.Data.Mappings
 
             // 1 : 1 => Medicamento : Estoque
             builder.HasOne(m => m.Estoque)
-                .WithOne(e => e.Medicamento);
+                .WithOne(e => e.Medicamento)
+                .HasForeignKey<Estoque>(e => e.IdMedicamento);
 
             builder.ToTable("Medicamento");
         }
