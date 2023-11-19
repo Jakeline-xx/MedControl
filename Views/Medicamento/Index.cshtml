@@ -1,0 +1,36 @@
+﻿@model List<MedControl.ViewModels.MedicamentoViewModel>
+@{
+    ViewData["Title"] = "Lista de Medicamentos";
+}
+<div class="container mt-4">
+    <h2>Medicamentos</h2>
+
+    <p>
+        <a asp-action="Criar" class="btn btn-success">Novo Medicamento</a>
+    </p>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Descricao</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var medicamento in Model)
+            {
+                <tr>
+                    <td>@medicamento.Id</td>
+                    <td>@medicamento.Nome</td>
+                    <td>@medicamento.Descricao</td>
+                    <td>
+                        <a asp-action="Detalhes" asp-route-id="@medicamento.Id" class="btn btn-info">Detalhes</a>
+                        <a asp-action="Editar" asp-route-id="@medicamento.Id" class="btn btn-warning">Editar</a>
+                        <a asp-action="Excluir" asp-route-id="@medicamento.Id" class="btn btn-danger">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

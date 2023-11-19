@@ -1,0 +1,25 @@
+﻿@model MedControl.ViewModels.MedicamentoViewModel
+
+<div class="container mt-4">
+    <h2>Excluir Medicamento</h2>
+
+    <dl class="row">
+        <dt class="col-sm-2">Nome</dt>
+        <dd class="col-sm-10">@Model.Nome</dd>
+
+        <dt class="col-sm-2">Descricao</dt>
+        <dd class="col-sm-10">@Model.Descricao</dd>
+
+    </dl>
+
+    <p>Tem certeza de que deseja excluir este Medicamento?</p>
+
+    <form asp-action="ExcluirConfirmado" method="post">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-danger">Sim, Excluir</button>
+            <a asp-action="Index" class="btn btn-primary">Não, Cancelar</a>
+        </div>
+    </form>
+</div>

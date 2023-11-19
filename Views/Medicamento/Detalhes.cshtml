@@ -1,0 +1,21 @@
+﻿@model MedControl.ViewModels.MedicamentoViewModel
+
+<h2>Detalhes do Medicamento</h2>
+
+<div>
+    <h4>Medicamento</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Nome</dt>
+        <dd class="col-sm-10">@Model.Nome</dd>
+
+        <dt class="col-sm-2">Descricao</dt>
+        <dd class="col-sm-10">@Model.Descricao</dd>
+
+    </dl>
+</div>
+
+<p>
+    <a asp-action="Editar" asp-route-id="@Model.Id">Editar</a> |
+    <a asp-action="Index">Voltar para a Lista</a>
+</p>

@@ -93,15 +93,8 @@ namespace MedControl.Controllers
                 return NotFound();
             }
 
-            var viewModel = new FuncionarioViewModel
-            {
-                Nome = funcionario.Nome,
-                Cargo = funcionario.Cargo,
-                Identificacao = funcionario.Identificacao,
-                Telefone = funcionario.Telefone,
-                IdDepartamento = funcionario.IdDepartamento,
-                IdUnidadeTrabalho = funcionario.IdUnidadeTrabalho
-            };
+            FuncionarioViewModel viewModel = funcionario;
+
             var departamentos = await _departamentoRepository.ObterTodos();
 
             var unidadesTrabalho = await _unidadeTrabalhoRepository.ObterTodos();
@@ -141,7 +134,15 @@ namespace MedControl.Controllers
         [HttpPost]
         public async Task<IActionResult> ExcluirConfirmado(Guid id)
         {
+            var funcionario = await _funcionarioRepository.ObterPorId(id);
+
+            if (funcionario == null)
+            {
+                return NotFound();
+            }
+
             await _funcionarioRepository.Remover(id);
+
             return RedirectToAction("Index");
         }
 
