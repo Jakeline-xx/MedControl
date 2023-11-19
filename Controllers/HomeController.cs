@@ -23,10 +23,15 @@ namespace MedControl.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [Route("/Home/Error")]
+        public IActionResult Error(int? statusCode)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            if (statusCode.HasValue && statusCode.Value == 404)
+            {
+                return View("NotFound");
+            }
+
+            return View("Error");
         }
     }
 }
