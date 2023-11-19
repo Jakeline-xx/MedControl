@@ -128,7 +128,9 @@ namespace MedControl.Controllers
                 return NotFound();
             }
 
-            return View(funcionario);
+            FuncionarioViewModel funcionarioViewModel = funcionario;
+
+            return View(funcionarioViewModel);
         }
 
         [HttpPost]
