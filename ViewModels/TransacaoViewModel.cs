@@ -28,7 +28,8 @@ namespace MedControl.ViewModels
                 IdEstoque = viewModel.IdEstoque,
                 IdFuncionario = viewModel.IdFuncionario,
                 Quantidade = viewModel.Quantidade,
-                DataTransacao = viewModel.DataTransacao
+                DataTransacao = viewModel.DataTransacao,
+                Estoque = viewModel.Estoque
             };
         }
 
@@ -41,7 +42,8 @@ namespace MedControl.ViewModels
                 IdEstoque = transacao.IdEstoque,
                 IdFuncionario = transacao.IdFuncionario,
                 Quantidade = transacao.Quantidade,
-                DataTransacao = transacao.DataTransacao
+                DataTransacao = transacao.DataTransacao,
+                Estoque = transacao.Estoque
             };
         }
     }

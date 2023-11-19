@@ -2,7 +2,6 @@
 using MedControl.Models;
 using MedControl.ViewModels;
 using MedControl.Data.Repositories.Abstractions;
-using MedControl.Data.Repositories;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MedControl.Controllers
@@ -27,7 +26,7 @@ namespace MedControl.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var transacoes = await _transacaoRepository.ObterTodos();
+            var transacoes = await _transacaoRepository.ObterTransacaoEstoqueMedicamento();
 
             var transacaoViewModels = transacoes.Select(transacao => (TransacaoViewModel)transacao).ToList();
 
@@ -67,33 +66,6 @@ namespace MedControl.Controllers
 
         }
 
-        public async Task<IActionResult> Editar(Guid id)
-        {
-            var transacao = await _transacaoRepository.ObterPorId(id);
-
-            if (transacao == null)
-            {
-                return NotFound();
-            }
-
-            TransacaoViewModel transacaoViewModel = transacao;
-
-            return View(transacaoViewModel);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Editar(TransacaoViewModel transacaoViewModel)
-        {
-            if (!ModelState.IsValid)
-                return View(transacaoViewModel);
-
-            Transacao transacao = transacaoViewModel;
-
-            await _transacaoRepository.Atualizar(transacao);
-
-            return RedirectToAction("Index");
-        }
-
         public async Task<IActionResult> Detalhes(Guid id)
         {
             var transacao = await _transacaoRepository.ObterPorId(id);
@@ -106,35 +78,6 @@ namespace MedControl.Controllers
             TransacaoViewModel transacaoViewModel = transacao;
 
             return View(transacaoViewModel);
-        }
-
-        public async Task<IActionResult> Excluir(Guid id)
-        {
-            var transacao = await _transacaoRepository.ObterPorId(id);
-
-            if (transacao == null)
-            {
-                return NotFound();
-            }
-
-            TransacaoViewModel transacaoViewModel = transacao;
-
-            return View(transacaoViewModel);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> ExcluirConfirmado(Guid id)
-        {
-            var transacao = await _transacaoRepository.ObterPorId(id);
-
-            if (transacao == null)
-            {
-                return NotFound();
-            }
-
-            await _transacaoRepository.Remover(id);
-
-            return RedirectToAction("Index");
         }
     }
 }
