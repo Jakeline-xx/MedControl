@@ -1,0 +1,32 @@
+﻿@model MedControl.ViewModels.RelatorioAnaliticoViewModel
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Categoria</th>
+            <th>Quantidade</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Departamentos</td>
+            <td>@Model.QtdDepartamentos</td>
+        </tr>
+        <tr>
+            <td>Funcionários</td>
+            <td>@Model.QtdFuncionarios</td>
+        </tr>
+        <tr>
+            <td>Medicamentos</td>
+            <td>@Model.QtdMedicamentos</td>
+        </tr>
+        <tr>
+            <td>Transações</td>
+            <td>@Model.QtdTransacoes</td>
+        </tr>
+        <tr>
+            <td>Unidades de Trabalho</td>
+            <td>@Model.QtdUnidadeTrabalho</td>
+        </tr>
+    </tbody>
+</table>

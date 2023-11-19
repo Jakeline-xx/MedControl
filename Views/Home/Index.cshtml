@@ -6,24 +6,79 @@
     <h1 class="display-4">Bem-vindo ao MedControl</h1>
     <p class="lead">Escolha uma opção abaixo:</p>
 
+
     <div class="row">
         <div class="col-md-4">
-            <a asp-action="Index" asp-controller="Funcionario" class="btn btn-primary btn-lg btn-block">Funcionários</a>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Funcionários</h5>
+                    <p class="card-text">Gerencie os funcionários do MedControl.</p>
+                    <a asp-action="Index" asp-controller="Funcionario" class="btn btn-primary">Ir para Funcionários</a>
+                </div>
+            </div>
         </div>
+
         <div class="col-md-4">
-            <a asp-action="Index" asp-controller="UnidadeTrabalho" class="btn btn-primary btn-lg btn-block">Unidades de Trabalho</a>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Unidades de Trabalho</h5>
+                    <p class="card-text">Gerencie as unidades de trabalho do MedControl.</p>
+                    <a asp-action="Index" asp-controller="UnidadeTrabalho" class="btn btn-primary">Ir para Unidades de Trabalho</a>
+                </div>
+            </div>
         </div>
+
         <div class="col-md-4">
-            <a asp-action="Index" asp-controller="Departamento" class="btn btn-primary btn-lg btn-block">Departamentos</a>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Departamentos</h5>
+                    <p class="card-text">Gerencie os departamentos do MedControl.</p>
+                    <a asp-action="Index" asp-controller="Departamento" class="btn btn-primary">Ir para Departamentos</a>
+                </div>
+            </div>
         </div>
+
+    </div>
+    <br />
+    <div class="row">
         <div class="col-md-4">
-            <a asp-action="Index" asp-controller="Medicamento" class="btn btn-primary btn-lg btn-block">Medicamentos</a>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Medicamentos</h5>
+                    <p class="card-text">Gerencie os medicamentos do MedControl.</p>
+                    <a asp-action="Index" asp-controller="Medicamento" class="btn btn-primary">Ir para Medicamentos</a>
+                </div>
+            </div>
         </div>
+
         <div class="col-md-4">
-            <a asp-action="Index" asp-controller="Estoque" class="btn btn-primary btn-lg btn-block">Estoques</a>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Estoques</h5>
+                    <p class="card-text">Gerencie os estoques do MedControl.</p>
+                    <a asp-action="Index" asp-controller="Estoque" class="btn btn-primary">Ir para Estoques</a>
+                </div>
+            </div>
         </div>
+
         <div class="col-md-4">
-            <a asp-action="Index" asp-controller="Transacao" class="btn btn-primary btn-lg btn-block">Transações</a>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Transações</h5>
+                    <p class="card-text">Gerencie as transações do MedControl.</p>
+                    <a asp-action="Index" asp-controller="Transacao" class="btn btn-primary">Ir para Transações</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="col-md-4">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Analítico</h5>
+                <p class="card-text">Visualize as métricas do MedControl</p>
+                <a asp-action="Index" asp-controller="Gestao" class="btn btn-primary">Ir para Analítico</a>
+            </div>
         </div>
     </div>
 </div>

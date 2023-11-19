@@ -12,5 +12,6 @@ namespace MedControl.Data.Repositories.Abstractions
         Task Remover(Guid id);
         Task<IEnumerable<TEntidade>> Buscar(Expression<Func<TEntidade, bool>> predicate);
         Task<int> SaveChanges();
+        int ContarRegistros();
     }
 }

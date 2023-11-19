@@ -29,8 +29,7 @@ namespace MedControl.Data.Repositories
 
         public virtual async Task<List<TEntidade>> ObterTodos()
         {
-            var x = await DbSet.ToListAsync();
-            return x;
+            return await DbSet.ToListAsync();
         }
 
         public virtual async Task Adicionar(TEntidade entidade)
@@ -56,9 +55,16 @@ namespace MedControl.Data.Repositories
             return await Db.SaveChangesAsync();
         }
 
+
+        public int ContarRegistros()
+        {
+            return DbSet.Count();
+        }
+
         public void Dispose()
         {
             Db?.Dispose();
         }
+
     }
 }
