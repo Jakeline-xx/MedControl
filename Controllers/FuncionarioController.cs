@@ -12,14 +12,17 @@ namespace MedControl.Controllers
         private readonly IFuncionarioRepository _funcionarioRepository;
         private readonly IDepartamentoRepository _departamentoRepository;
         private readonly IUnidadeTrabalhoRepository _unidadeTrabalhoRepository;
+        private readonly ITransacaoRepository _transacaoRepository;
 
         public FuncionarioController(IFuncionarioRepository funcionarioRepository,
                                     IDepartamentoRepository departamentoRepository,
-                                    IUnidadeTrabalhoRepository unidadeTrabalhoRepository)
+                                    IUnidadeTrabalhoRepository unidadeTrabalhoRepository,
+                                    ITransacaoRepository transacaoRepository)
         {
             _funcionarioRepository = funcionarioRepository;
             _departamentoRepository = departamentoRepository;
             _unidadeTrabalhoRepository = unidadeTrabalhoRepository;
+            _transacaoRepository = transacaoRepository;
         }
 
         public async Task<IActionResult> Index()
@@ -121,6 +124,10 @@ namespace MedControl.Controllers
 
         public async Task<IActionResult> Excluir(Guid id)
         {
+            if (TempData["Mensagem"] != null)
+            {
+                ViewBag.Mensagem = TempData["Mensagem"].ToString();
+            }
             var funcionario = await _funcionarioRepository.ObterPorId(id);
 
             if (funcionario == null)
@@ -139,8 +146,14 @@ namespace MedControl.Controllers
             var funcionario = await _funcionarioRepository.ObterPorId(id);
 
             if (funcionario == null)
-            {
                 return NotFound();
+
+            var transacoes = await _transacaoRepository.Buscar(transacao => transacao.IdFuncionario == id);
+            if (transacoes.Any())
+            {
+                var mensagem = $"Não é possível excluir o funcionario {funcionario.Nome}, pois existem transações vinculadas";
+                TempData["Mensagem"] = mensagem;
+                return RedirectToAction("Excluir", new { id });
             }
 
             await _funcionarioRepository.Remover(id);
