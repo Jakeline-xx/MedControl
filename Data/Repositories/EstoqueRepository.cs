@@ -1,6 +1,7 @@
 ﻿using MedControl.Data.Contexts;
 using MedControl.Data.Repositories.Abstractions;
 using MedControl.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace MedControl.Data.Repositories
 {
@@ -8,6 +9,12 @@ namespace MedControl.Data.Repositories
     {
         public EstoqueRepository(MedControlDbContext db) : base(db)
         {
+        }
+        public async Task<List<Estoque>> ObterEstoqueMedicamentos()
+        {
+            return await Db.Estoque.AsNoTracking()
+                                       .Include(c => c.Medicamento)
+                                       .ToListAsync();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using MedControl.Data.Contexts;
 using MedControl.Data.Repositories.Abstractions;
 using MedControl.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace MedControl.Data.Repositories
 {

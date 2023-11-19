@@ -13,6 +13,7 @@ namespace MedControl.ViewModels
 
         [Required(ErrorMessage = "O ID do Medicamento é obrigatório")]
         public Guid IdMedicamento { get; set; }
+        public string NomeMedicamento { get; set; }
 
         // EstoqueViewModel -> Estoque
         public static implicit operator Estoque(EstoqueViewModel viewModel)
@@ -32,7 +33,8 @@ namespace MedControl.ViewModels
             {
                 Id = estoque.Id,
                 QuantidadeDisponivel = estoque.QuantidadeDisponivel,
-                IdMedicamento = estoque.IdMedicamento
+                IdMedicamento = estoque.IdMedicamento,
+                NomeMedicamento = estoque.Medicamento.Nome
             };
         }
     }

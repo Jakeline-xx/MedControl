@@ -35,6 +35,11 @@ namespace MedControl.Controllers
             {
                 Medicamento medicamento = medicamentoViewModel;
 
+                medicamento.Estoque = new Estoque
+                {
+                    IdMedicamento = medicamento.Id,
+                    QuantidadeDisponivel = 0
+                };
                 await _medicamentoRepository.Adicionar(medicamento);
 
                 return RedirectToAction("Index");
