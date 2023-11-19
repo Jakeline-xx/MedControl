@@ -1,0 +1,20 @@
+﻿@model MedControl.ViewModels.EstoqueViewModel
+
+<h2>Detalhes do Estoque</h2>
+
+<div>
+    <h4>Estoque</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Quantidade Disponível</dt>
+        <dd class="col-sm-10">@Model.QuantidadeDisponivel</dd>
+
+        <dt class="col-sm-2">ID do Medicamento</dt>
+        <dd class="col-sm-10">@Model.IdMedicamento</dd>
+    </dl>
+</div>
+
+<p>
+    <a asp-action="Editar" asp-route-id="@Model.Id">Editar</a> |
+    <a asp-action="Index">Voltar para a Lista</a>
+</p>

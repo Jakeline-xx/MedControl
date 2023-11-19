@@ -1,0 +1,37 @@
+﻿@model List<MedControl.ViewModels.EstoqueViewModel>
+
+@{
+    ViewData["Title"] = "Lista de Estoques";
+}
+<div class="container mt-4">
+    <h2>Estoques</h2>
+
+    <p>
+        <a asp-action="Criar" class="btn btn-success">Novo Estoque</a>
+    </p>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Quantidade Disponível</th>
+                <th>ID do Medicamento</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var estoque in Model)
+            {
+                <tr>
+                    <td>@estoque.Id</td>
+                    <td>@estoque.QuantidadeDisponivel</td>
+                    <td>@estoque.IdMedicamento</td>
+                    <td>
+                        <a asp-action="Detalhes" asp-route-id="@estoque.Id" class="btn btn-info">Detalhes</a>
+                        <a asp-action="Editar" asp-route-id="@estoque.Id" class="btn btn-warning">Editar</a>
+                        <a asp-action="Excluir" asp-route-id="@estoque.Id" class="btn btn-danger">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

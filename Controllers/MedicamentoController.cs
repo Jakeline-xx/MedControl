@@ -1,5 +1,4 @@
-﻿// MedicamentoController.cs
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MedControl.Models;
 using MedControl.ViewModels;
 using MedControl.Data.Repositories.Abstractions;
