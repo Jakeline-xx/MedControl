@@ -22,6 +22,11 @@ namespace MedControl.Controllers
         {
             return View();
         }
+        public IActionResult Sobre()
+        {
+            return View();
+        }
+
 
         [Route("/Home/Error")]
         public IActionResult Error(int? statusCode)
