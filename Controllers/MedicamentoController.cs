@@ -2,6 +2,8 @@
 using MedControl.Models;
 using MedControl.ViewModels;
 using MedControl.Data.Repositories.Abstractions;
+using System.Text.Json;
+
 
 namespace MedControl.Controllers
 {
@@ -25,27 +27,45 @@ namespace MedControl.Controllers
 
         public IActionResult Criar()
         {
+            if (TempData["Mensagem"] != null)
+            {
+                ViewBag.Mensagem = TempData["Mensagem"].ToString();
+
+                string viewModelJson = TempData["ViewModel"].ToString();
+                MedicamentoViewModel viewModel = JsonSerializer.Deserialize<MedicamentoViewModel>(viewModelJson);
+
+                return View(viewModel);
+            }
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Criar(MedicamentoViewModel medicamentoViewModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+                return View(medicamentoViewModel);
+
+            var medicamentoExistente = await _medicamentoRepository.Buscar(medicamento => medicamento.Nome == medicamentoViewModel.Nome);
+
+            if (medicamentoExistente.Any())
             {
-                Medicamento medicamento = medicamentoViewModel;
-
-                medicamento.Estoque = new Estoque
-                {
-                    IdMedicamento = medicamento.Id,
-                    QuantidadeDisponivel = 0
-                };
-                await _medicamentoRepository.Adicionar(medicamento);
-
-                return RedirectToAction("Index");
+                var mensagem = "Não é possível criar medicamentos duplicados";
+                TempData["Mensagem"] = mensagem;
+                TempData["ViewModel"] = JsonSerializer.Serialize(medicamentoViewModel);
+                return RedirectToAction("Criar");
             }
 
-            return View(medicamentoViewModel);
+
+            Medicamento medicamento = medicamentoViewModel;
+
+            medicamento.Estoque = new Estoque
+            {
+                IdMedicamento = medicamento.Id,
+                QuantidadeDisponivel = 0
+            };
+            await _medicamentoRepository.Adicionar(medicamento);
+
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Editar(Guid id)

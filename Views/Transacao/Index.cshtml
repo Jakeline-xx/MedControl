@@ -1,0 +1,42 @@
+﻿@model List<MedControl.ViewModels.TransacaoViewModel>
+
+@{
+    ViewData["Title"] = "Lista de Transações";
+}
+
+<div class="container mt-4">
+    <h2>Transações</h2>
+
+    <p>
+        <a asp-action="Criar" class="btn btn-success">Nova Transação</a>
+    </p>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ID do Estoque</th>
+                <th>ID do Funcionário</th>
+                <th>Quantidade</th>
+                <th>Data da Transação</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var transacao in Model)
+            {
+                <tr>
+                    <td>@transacao.Id</td>
+                    <td>@transacao.IdEstoque</td>
+                    <td>@transacao.IdFuncionario</td>
+                    <td>@transacao.Quantidade</td>
+                    <td>@transacao.DataTransacao</td>
+                    <td>
+                        <a asp-action="Detalhes" asp-route-id="@transacao.Id" class="btn btn-info">Detalhes</a>
+                        <a asp-action="Editar" asp-route-id="@transacao.Id" class="btn btn-warning">Editar</a>
+                        <a asp-action="Excluir" asp-route-id="@transacao.Id" class="btn btn-danger">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

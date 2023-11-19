@@ -3,6 +3,12 @@
     ViewData["Title"] = "Criar Medicamento";
 }
 <div class="container mt-4">
+    @if (ViewBag.Mensagem != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @ViewBag.Mensagem
+        </div>
+    }
     <h2>@ViewData["Title"]</h2>
 
     <form asp-action="Criar" method="post">

@@ -1,0 +1,27 @@
+﻿@model MedControl.ViewModels.TransacaoViewModel
+
+<div class="container mt-4">
+    <h2>Detalhes da Transação</h2>
+
+    <dl class="row">
+        <dt class="col-sm-2">ID</dt>
+        <dd class="col-sm-10">@Model.Id</dd>
+
+        <dt class="col-sm-2">ID do Estoque</dt>
+        <dd class="col-sm-10">@Model.IdEstoque</dd>
+
+        <dt class="col-sm-2">ID do Funcionário</dt>
+        <dd class="col-sm-10">@Model.IdFuncionario</dd>
+
+        <dt class="col-sm-2">Quantidade</dt>
+        <dd class="col-sm-10">@Model.Quantidade</dd>
+
+        <dt class="col-sm-2">Data da Transação</dt>
+        <dd class="col-sm-10">@Model.DataTransacao</dd>
+    </dl>
+
+    <p>
+        <a asp-action="Editar" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a> |
+        <a asp-action="Index" class="btn btn-primary">Voltar para a Lista</a>
+    </p>
+</div>
