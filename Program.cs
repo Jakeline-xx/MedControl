@@ -1,6 +1,7 @@
 using MedControl.Data.Contexts;
 using MedControl.Extensions;
 using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,8 @@ builder.Services.AddDbContext<MedControlDbContext>(options =>
     options.UseSqlServer(connectionString);
     options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 });
+ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
 
 
 

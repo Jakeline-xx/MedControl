@@ -20,7 +20,6 @@ namespace MedControl.Data.Repositories
            .ThenInclude(e => e.Medicamento)
            .ToListAsync();
         }
-
         public async void RemoverMultiplos(IEnumerable<Transacao> transacoes)
         {
             foreach (var transacao in transacoes)
