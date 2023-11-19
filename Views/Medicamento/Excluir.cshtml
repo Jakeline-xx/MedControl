@@ -1,6 +1,12 @@
 ﻿@model MedControl.ViewModels.MedicamentoViewModel
 
 <div class="container mt-4">
+    @if (ViewBag.Mensagem != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @ViewBag.Mensagem
+        </div>
+    }
     <h2>Excluir Medicamento</h2>
 
     <dl class="row">

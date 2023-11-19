@@ -16,6 +16,7 @@ namespace MedControl.ViewModels
         [Required(ErrorMessage = "O campo Quantidade é obrigatório")]
         public int Quantidade { get; set; }
         public Estoque Estoque { get; set; }
+        public Funcionario Funcionario{ get; set; }
 
         public DateTime DataTransacao { get; set; }
 
@@ -29,7 +30,8 @@ namespace MedControl.ViewModels
                 IdFuncionario = viewModel.IdFuncionario,
                 Quantidade = viewModel.Quantidade,
                 DataTransacao = viewModel.DataTransacao,
-                Estoque = viewModel.Estoque
+                Estoque = viewModel.Estoque,
+                Funcionario = viewModel.Funcionario
             };
         }
 
@@ -43,7 +45,8 @@ namespace MedControl.ViewModels
                 IdFuncionario = transacao.IdFuncionario,
                 Quantidade = transacao.Quantidade,
                 DataTransacao = transacao.DataTransacao,
-                Estoque = transacao.Estoque
+                Estoque = transacao.Estoque,
+                Funcionario = transacao.Funcionario
             };
         }
     }

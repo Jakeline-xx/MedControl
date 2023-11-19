@@ -10,10 +10,16 @@ namespace MedControl.Controllers
     public class MedicamentoController : Controller
     {
         private readonly IMedicamentoRepository _medicamentoRepository;
+        private readonly IEstoqueRepository _estoqueRepository;
+        private readonly ITransacaoRepository _transacaoRepository;
 
-        public MedicamentoController(IMedicamentoRepository medicamentoRepository)
+        public MedicamentoController(IMedicamentoRepository medicamentoRepository,
+                                     IEstoqueRepository estoqueRepository,
+                                     ITransacaoRepository transacaoRepository)
         {
             _medicamentoRepository = medicamentoRepository;
+            _estoqueRepository = estoqueRepository;
+            _transacaoRepository = transacaoRepository;
         }
 
         public async Task<IActionResult> Index()
@@ -113,6 +119,10 @@ namespace MedControl.Controllers
 
         public async Task<IActionResult> Excluir(Guid id)
         {
+            if (TempData["Mensagem"] != null)
+            {
+                ViewBag.Mensagem = TempData["Mensagem"].ToString();
+            }
             var medicamento = await _medicamentoRepository.ObterPorId(id);
 
             if (medicamento == null)
@@ -134,7 +144,18 @@ namespace MedControl.Controllers
             {
                 return NotFound();
             }
+            var estoqueMedicamento = await _medicamentoRepository.ObterMedicamentoEstoque(id);
+            if (estoqueMedicamento.Estoque.QuantidadeDisponivel > 0)
+            {
+                var mensagem = $"Não é possível excluir o Medicamento {estoqueMedicamento.Nome}, pois existem quantidades disponvieis em estoque";
+                TempData["Mensagem"] = mensagem;
+                return RedirectToAction("Excluir", new { id });
+            }
+            var transacoes = await _transacaoRepository.Buscar(t => t.IdEstoque == estoqueMedicamento.Estoque.Id);
 
+            _transacaoRepository.RemoverMultiplos(transacoes);
+
+            await _estoqueRepository.Remover(estoqueMedicamento.Estoque.Id);
             await _medicamentoRepository.Remover(id);
 
             return RedirectToAction("Index");

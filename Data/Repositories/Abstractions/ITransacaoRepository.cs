@@ -4,6 +4,7 @@ namespace MedControl.Data.Repositories.Abstractions
 {
     public interface ITransacaoRepository : IRepository<Transacao>
     {
-        Task<List<Transacao>> ObterTransacaoEstoqueMedicamento();
+        Task<List<Transacao>> ObterTransacaoFuncionarioEstoqueMedicamento();
+        void RemoverMultiplos(IEnumerable<Transacao> transacoes);
     }
 }

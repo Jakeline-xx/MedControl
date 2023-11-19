@@ -26,7 +26,7 @@ namespace MedControl.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var transacoes = await _transacaoRepository.ObterTransacaoEstoqueMedicamento();
+            var transacoes = await _transacaoRepository.ObterTransacaoFuncionarioEstoqueMedicamento();
 
             var transacaoViewModels = transacoes.Select(transacao => (TransacaoViewModel)transacao).ToList();
 
@@ -57,10 +57,10 @@ namespace MedControl.Controllers
             transacao.IdEstoque = estoque.Id;
 
             estoque.QuantidadeDisponivel += transacaoViewModel.Quantidade;
-
-            await _estoqueRepository.Atualizar(estoque);
+            transacao.Estoque = null;
 
             await _transacaoRepository.Adicionar(transacao);
+            await _estoqueRepository.Atualizar(estoque);
 
             return RedirectToAction("Index");
 

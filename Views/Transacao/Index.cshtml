@@ -15,7 +15,7 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>ID do Funcionário</th>
+                <th>Funcionário</th>
                 <th>Medicamento</th>
                 <th>Quantidade</th>
                 <th>Data da Transação</th>
@@ -26,9 +26,9 @@
             {
                 <tr>
                     <td>@transacao.Id</td>
-                    <td>@transacao.IdFuncionario</td>
+                    <td>@transacao.Funcionario.Nome</td>
                     <td>@transacao.Estoque.Medicamento.Nome</td>
-                    <td>@transacao.Quantidade</td>
+                    <td class="@(transacao.Quantidade >= 0 ? "positive" : "negative")">@transacao.Quantidade</td>
                     <td>@transacao.DataTransacao.ToString("dd/MM/yyyy", new System.Globalization.CultureInfo("pt-BR"))</td>
                     <td>
                         <a asp-action="Detalhes" asp-route-id="@transacao.Id" class="btn btn-info">Detalhes</a>
