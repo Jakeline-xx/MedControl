@@ -16,5 +16,12 @@ namespace MedControl.Data.Repositories
                                        .Include(c => c.Medicamento)
                                        .ToListAsync();
         }
+
+        public async Task<Estoque> ObterEstoqueMedicamentos(Guid id)
+        {
+            return await Db.Estoque.AsNoTracking()
+                           .Include(c => c.Medicamento)
+                           .FirstOrDefaultAsync(x => x.Medicamento.Id == id);
+        }
     }
 }

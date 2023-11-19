@@ -15,6 +15,7 @@ namespace MedControl.ViewModels
 
         [Required(ErrorMessage = "O campo Quantidade é obrigatório")]
         public int Quantidade { get; set; }
+        public Estoque Estoque { get; set; }
 
         public DateTime DataTransacao { get; set; }
 

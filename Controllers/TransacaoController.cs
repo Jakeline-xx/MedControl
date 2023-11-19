@@ -12,14 +12,17 @@ namespace MedControl.Controllers
         private readonly ITransacaoRepository _transacaoRepository;
         private readonly IFuncionarioRepository _funcionarioRepository;
         private readonly IMedicamentoRepository _medicamentoRepository;
+        private readonly IEstoqueRepository _estoqueRepository;
 
         public TransacaoController(ITransacaoRepository transacaoRepository,
                                    IFuncionarioRepository funcionarioRepository,
-                                   IMedicamentoRepository medicamentoRepository)
+                                   IMedicamentoRepository medicamentoRepository,
+                                   IEstoqueRepository estoqueRepository)
         {
             _transacaoRepository = transacaoRepository;
             _funcionarioRepository = funcionarioRepository;
             _medicamentoRepository = medicamentoRepository;
+            _estoqueRepository = estoqueRepository;
         }
 
         public async Task<IActionResult> Index()
@@ -34,8 +37,10 @@ namespace MedControl.Controllers
         public async Task<IActionResult> Criar()
         {
             var funcionarios = await _funcionarioRepository.ObterTodos();
+            var medicamentos = await _medicamentoRepository.ObterTodos();
 
             ViewBag.Funcionarios = new SelectList(funcionarios, "Id", "Nome");
+            ViewBag.Medicamentos = new SelectList(medicamentos, "Id", "Nome");
 
             return View();
         }
@@ -48,6 +53,13 @@ namespace MedControl.Controllers
 
             Transacao transacao = transacaoViewModel;
             transacao.DataTransacao = DateTime.Now;
+
+            var estoque = await _estoqueRepository.ObterEstoqueMedicamentos(transacaoViewModel.Estoque.Medicamento.Id);
+            transacao.IdEstoque = estoque.Id;
+
+            estoque.QuantidadeDisponivel += transacaoViewModel.Quantidade;
+
+            await _estoqueRepository.Atualizar(estoque);
 
             await _transacaoRepository.Adicionar(transacao);
 
