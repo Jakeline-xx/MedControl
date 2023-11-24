@@ -15,5 +15,5 @@ Essa iniciativa integra automação, controle de estoque em tempo real, seguran�
 
   # Arquitetura
 
-  ![Arquitetura](MedControl/MedcontrolArquitetura.png)
+  ![Arquitetura](/MedcontrolArquitetura.png)
 
