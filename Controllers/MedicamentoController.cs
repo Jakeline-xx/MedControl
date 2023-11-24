@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MedControl.Data.Repositories.Abstractions;
 using MedControl.Models;
 using MedControl.ViewModels;
-using MedControl.Data.Repositories.Abstractions;
-using System.Text.Json;
-using System.Xml;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace MedControl.Controllers
@@ -25,23 +23,27 @@ namespace MedControl.Controllers
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index()
+
+        public async Task<Object> Teste()
         {
             try
             {
-                var medicamentos = await _medicamentoRepository.ObterTodos();
-
-                var medicamentoViewModel = medicamentos.Select(medicamento => (MedicamentoViewModel)medicamento).ToList();
-
-                return View(medicamentoViewModel);
+                return await _medicamentoRepository.ObterTodos();
             }
             catch (Exception e)
             {
                 var exceptionJson = JsonConvert.SerializeObject(e);
-                _logger.LogError(exceptionJson);
-                throw;
+                return exceptionJson;
             }
+        }
 
+        public async Task<IActionResult> Index()
+        {
+            var medicamentos = await _medicamentoRepository.ObterTodos();
+
+            var medicamentoViewModel = medicamentos.Select(medicamento => (MedicamentoViewModel)medicamento).ToList();
+
+            return View(medicamentoViewModel);
         }
 
         public IActionResult Criar()
