@@ -13,7 +13,7 @@ Essa iniciativa integra automação, controle de estoque em tempo real, seguran�
 - Confiabilidade nas Entregas: A conferência automática de peso assegura que nossas entregas sejam precisas, evitando erros na distribuição de medicamentos.
 - Relatório: Os relatorios gerados no estoque fornecem informações em tempo real sobre o estado atual do estoque de medicamentos. Permite uma visão imediata da disponibilidade de medicamentos, facilitando a tomada de decisões sobre reabastecimento e prevenindo possíveis escassezes.
 
-  # Arquitetura
+# Arquitetura
 
-  ![Arquitetura](/MedcontrolArquitetura.png)
+![Arquitetura](/MedcontrolArquitetura.png)
 
