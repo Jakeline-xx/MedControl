@@ -2,7 +2,6 @@
 using MedControl.Models;
 using MedControl.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 namespace MedControl.Controllers
 {
     public class MedicamentoController : Controller
@@ -20,20 +19,6 @@ namespace MedControl.Controllers
             _estoqueRepository = estoqueRepository;
             _transacaoRepository = transacaoRepository;
             _logger = logger;
-        }
-
-
-        public async Task<Object> Teste()
-        {
-            try
-            {
-                return await _medicamentoRepository.ObterTodos();
-            }
-            catch (Exception e)
-            {
-                var exceptionJson = JsonConvert.SerializeObject(e);
-                return exceptionJson;
-            }
         }
 
         public async Task<IActionResult> Index()
