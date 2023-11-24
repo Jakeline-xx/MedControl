@@ -2,7 +2,7 @@
 using MedControl.Models;
 using MedControl.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-
+using Newtonsoft.Json;
 namespace MedControl.Controllers
 {
     public class MedicamentoController : Controller
