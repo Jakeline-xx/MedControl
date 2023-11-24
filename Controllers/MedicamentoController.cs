@@ -3,7 +3,8 @@ using MedControl.Models;
 using MedControl.ViewModels;
 using MedControl.Data.Repositories.Abstractions;
 using System.Text.Json;
-
+using System.Xml;
+using Newtonsoft.Json;
 
 namespace MedControl.Controllers
 {
@@ -12,23 +13,35 @@ namespace MedControl.Controllers
         private readonly IMedicamentoRepository _medicamentoRepository;
         private readonly IEstoqueRepository _estoqueRepository;
         private readonly ITransacaoRepository _transacaoRepository;
-
+        private readonly ILogger<MedicamentoController> _logger;
         public MedicamentoController(IMedicamentoRepository medicamentoRepository,
                                      IEstoqueRepository estoqueRepository,
-                                     ITransacaoRepository transacaoRepository)
+                                     ITransacaoRepository transacaoRepository,
+                                     ILogger<MedicamentoController> logger)
         {
             _medicamentoRepository = medicamentoRepository;
             _estoqueRepository = estoqueRepository;
             _transacaoRepository = transacaoRepository;
+            _logger = logger;
         }
 
         public async Task<IActionResult> Index()
         {
-            var medicamentos = await _medicamentoRepository.ObterTodos();
+            try
+            {
+                var medicamentos = await _medicamentoRepository.ObterTodos();
 
-            var medicamentoViewModel = medicamentos.Select(medicamento => (MedicamentoViewModel)medicamento).ToList();
+                var medicamentoViewModel = medicamentos.Select(medicamento => (MedicamentoViewModel)medicamento).ToList();
 
-            return View(medicamentoViewModel);
+                return View(medicamentoViewModel);
+            }
+            catch (Exception e)
+            {
+                var exceptionJson = JsonConvert.SerializeObject(e);
+                _logger.LogError(exceptionJson);
+                throw;
+            }
+
         }
 
         public IActionResult Criar()
@@ -38,7 +51,7 @@ namespace MedControl.Controllers
                 ViewBag.Mensagem = TempData["Mensagem"].ToString();
 
                 string viewModelJson = TempData["ViewModel"].ToString();
-                MedicamentoViewModel viewModel = JsonSerializer.Deserialize<MedicamentoViewModel>(viewModelJson);
+                MedicamentoViewModel viewModel = System.Text.Json.JsonSerializer.Deserialize<MedicamentoViewModel>(viewModelJson);
 
                 return View(viewModel);
             }
@@ -57,7 +70,7 @@ namespace MedControl.Controllers
             {
                 var mensagem = "Não é possível criar medicamentos duplicados";
                 TempData["Mensagem"] = mensagem;
-                TempData["ViewModel"] = JsonSerializer.Serialize(medicamentoViewModel);
+                TempData["ViewModel"] = System.Text.Json.JsonSerializer.Serialize(medicamentoViewModel);
                 return RedirectToAction("Criar");
             }
 
